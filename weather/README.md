@@ -7,6 +7,10 @@ and, react native project weather by location
 
 
 
+---
+
+
+
 ### feature
 
 1. get location
@@ -15,11 +19,21 @@ and, react native project weather by location
 
 
 
+
+
+---
+
+
+
 ## Result Screenshot
 
-![weather_app](https://github.com/cothi/reactNativeTest/blob/main/weather/assets/weather_app.jpeg?raw=true)
 
 
+<img src="https://github.com/cothi/reactNativeTest/blob/main/weather/assets/weather_app.jpeg?raw=true&&p" alt="weather_app" style="zoom:40%;" />
+
+
+
+---
 
 
 
