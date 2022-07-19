@@ -33,7 +33,7 @@ todo app
 
 
 
-<img src="https://github.com/cothi/reactNativeTest/tree/main/todo/assets/todo.jpeg?raw=true&&p" alt="weather_app" style="zoom:40%;" />
+<img src="https://github.com/cothi/reactNativeTest/blob/main/todo/assets/todo.jpeg?raw=true&&p" alt="weather_app" style="zoom:40%;" />
 
 
 
