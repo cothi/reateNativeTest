@@ -1,7 +1,8 @@
+import { Fontisto } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Alert, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { theme } from "./color"
 
 
@@ -33,7 +34,7 @@ export default function App() {
 
 
   // addToDo Action
-  const addToDo = () => {
+  const addToDo = async () => {
     if (text == "") {
       return;
     }
@@ -44,6 +45,21 @@ export default function App() {
     setToDos(newToDos);
     await saveToDos(newToDos);
     setText("");
+  }
+  const deleteToDo = (key) => {
+    Alert.alert("Delete To Do", "Are you sure", [
+      { text: "Cancel" },
+      {
+        text: "I'm sure",
+        style: "destructive",
+        onPress: () => {
+          const newToDos = { ...toDos };
+          delete newToDos[key];
+          setToDos(newToDos);
+          saveToDos(newToDos);
+        },
+      }
+    ]);
   }
 
   return (
@@ -72,13 +88,18 @@ export default function App() {
         placeholder={working ? "Add a To Do" : "Where do you want to go?"}
       />
       <ScrollView>
-        {Object.keys(toDos).map((key) =>
+        {toDos ? (Object.keys(toDos).map((key) =>
           toDos[key].working === working ? (
             <View style={styles.toDo} key={key}>
-              <Text style={styles.toDoText}> {toDos[key].text} </Text>
+              <Text style={styles.toDoText}>
+                {toDos[key].text}
+              </Text>
+              <TouchableOpacity onPress={() => deleteToDo(key)}>
+                <Fontisto name="trash" size={18} color={theme.grey} />
+              </TouchableOpacity>
             </View>
-          ) : null
-        )}
+          ) : null)) : null}
+
       </ScrollView>
 
     </View >
@@ -110,15 +131,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   toDo: {
-    backgroundColor: theme.grey,
+    backgroundColor: theme.toDoBg,
     marginBottom: 10,
     paddingVertical: 20,
     paddingHorizontal: 20,
     borderRadius: 15,
+    flexDirection: "row",
+
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   toDoText: {
     color: "white",
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: "600",
   }
 });
